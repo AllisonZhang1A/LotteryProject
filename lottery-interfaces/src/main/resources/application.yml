@@ -4,13 +4,15 @@ server:
 spring:
   datasource:
     username: root
-    password: 1234
+    password: 111
     url: jdbc:mysql://127.0.0.1:3306/lottery?useUnicode=true
     driver-class-name: com.mysql.jdbc.Driver
 
-mybatis:
-  mapper-locations: classpath:/mybatis/mapper/*.xml
-  config-location:  classpath:/mybatis/config/mybatis-config.xml
+mybatis-plus:
+  # MyBatis-Plus 配置项，配置通用的 Mapper 和分页插件等
+  global-config:
+    db-config:
+      id-type: auto  # 配置主键自增策略
 
 # Dubbo 广播方式配置
 dubbo:
