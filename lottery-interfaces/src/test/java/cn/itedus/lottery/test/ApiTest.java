@@ -1,7 +1,6 @@
 package cn.itedus.lottery.test;
 
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
-import cn.itedus.lottery.infrastructure.po.Activity;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.junit.runner.RunWith;
