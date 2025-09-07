@@ -2,8 +2,12 @@ package cn.itedus.lottery.doman.strategy.model.aggregates;
 
 
 
-import cn.itedus.lottery.doman.strategy.model.vo.StrategyBriefVO;
-import cn.itedus.lottery.doman.strategy.model.vo.StrategyDetailBriefVO;
+import cn.itedus.lottery.infrastructure.po.Strategy;
+import cn.itedus.lottery.infrastructure.po.StrategyDetail;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -14,7 +18,10 @@ import java.util.List;
  * @github: https://github.com/fuzhengwei
  * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class StrategyRich {
 
     /**
@@ -25,10 +32,10 @@ public class StrategyRich {
     /**
      * 策略配置
      */
-    private StrategyBriefVO strategy;
+    private Strategy strategy;
 
     /**
      * 策略明细
      */
-    private List<StrategyDetailBriefVO> strategyDetailList;
+    private List<StrategyDetail> strategyDetailList;
 }
