@@ -1,6 +1,6 @@
 package cn.itedus.lottery.doman.strategy.model.res;
 
-import cn.itedus.lottery.doman.strategy.model.vo.DrawAwardVO;
+import cn.itedus.lottery.doman.strategy.model.vo.DrawAwardInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,5 +36,5 @@ public class DrawResult {
     /**
      * 中奖奖品信息
      */
-    private DrawAwardVO drawAwardInfo;
+    private DrawAwardInfo drawAwardInfo;
 }

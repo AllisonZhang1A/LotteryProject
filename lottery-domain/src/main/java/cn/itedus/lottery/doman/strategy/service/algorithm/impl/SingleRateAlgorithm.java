@@ -1,7 +1,8 @@
 package cn.itedus.lottery.doman.strategy.service.algorithm.impl;
 
-import cn.itedus.lottery.doman.strategy.model.vo.AwardRateVO;
+import cn.itedus.lottery.doman.strategy.model.vo.AwardRateInfo;
 import cn.itedus.lottery.doman.strategy.service.algorithm.BaseAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author yian.zhang
  * @since 2025/9/6
  */
-
-public class SingleAlgorithm extends BaseAlgorithm {
+@Component("singleRateDrawAlgorithm")
+public class SingleRateAlgorithm extends BaseAlgorithm {
 
     /**
      * 桶数组缓存 - 线程安全
@@ -28,34 +29,28 @@ public class SingleAlgorithm extends BaseAlgorithm {
      */
     private static final int DEFAULT_BUCKET_SIZE = 100;
 
-    /**
-     * 初始化概率区间
-     * @param strategyId
-     * @param strategyMode
-     * @param awardRateInfoList
-     */
     @Override
-    protected void doInit(Long strategyId, Integer strategyMode, List<AwardRateVO> awardRateInfoList) {
+    protected void doInit(Long strategyId, List<AwardRateInfo> awardRateInfoList) {
         // 数据验证
         if (awardRateInfoList == null || awardRateInfoList.isEmpty()) {
             throw new IllegalArgumentException("策略ID: " + strategyId + " 的奖品概率列表不能为空");
         }
-        
+
         // 验证概率总和是否为1
         BigDecimal totalRate = awardRateInfoList.stream()
-                .map(AwardRateVO::getAwardRate)
+                .map(AwardRateInfo::getAwardRate)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        
+
         if (totalRate.subtract(BigDecimal.ONE).abs().compareTo(new BigDecimal("0.01")) > 0) {
             throw new IllegalArgumentException("策略ID: " + strategyId + " 的概率总和不等于1，当前总和: " + totalRate);
         }
-        
+
         // 创建100个桶的数组
         String[] buckets = new String[DEFAULT_BUCKET_SIZE];
         int currentIndex = 0;
-        
+
         // 遍历奖品信息列表，取出每一个奖品的概率
-        for(AwardRateVO awardRateVO : awardRateInfoList){
+        for(AwardRateInfo awardRateVO : awardRateInfoList){
             String awardId = awardRateVO.getAwardId();
             BigDecimal awardRate = awardRateVO.getAwardRate();
 

@@ -1,6 +1,6 @@
 package cn.itedus.lottery.doman.strategy.service.algorithm;
 
-import cn.itedus.lottery.doman.strategy.model.vo.AwardRateVO;
+import cn.itedus.lottery.doman.strategy.model.vo.AwardRateInfo;
 
 import java.util.List;
 
@@ -21,10 +21,9 @@ public interface IDrawAlgorithm {
   * 0.3 = 0 + 0.2 ~ 0.2 + 0.3 = 0.2 ~ 0.5
   * 0.5 = 0.5 ~ 1 （计算方式同上）
   * @param strategyId
-  * @param strategyMode
   * @param awardRateInfoList
   */
- void initRateTuple(Long strategyId,Integer strategyMode, List<AwardRateVO> awardRateInfoList);
+ void initRateTuple(Long strategyId,List<AwardRateInfo> awardRateInfoList);
 
  /**
   * 生成随机数，索引到对应的奖品信息返回结果
@@ -33,4 +32,11 @@ public interface IDrawAlgorithm {
   * @return 中奖结果
   */
  String randomDraw(Long strategyId, List<String> excludeAwardIds);
+
+ /**
+  * 判断是否已经，做了数据初始化
+  * @param strategyId    策略ID
+  * @return              判断结果
+  */
+ boolean isExistRateTuple(Long strategyId);
 }
