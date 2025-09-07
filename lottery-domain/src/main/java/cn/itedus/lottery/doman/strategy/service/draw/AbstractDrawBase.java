@@ -44,9 +44,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
         String awardId = this.drawAlgorithm(req.getStrategyId(),drawAlgorithmGroup.get(strategy.getStrategyMode()), excludeAwardIds);
 
         //5.包装抽奖结果
-        DrawResult drawResult = new DrawResult();
-        buildDrawResult(req.getUId(), req.getStrategyId(),awardId);
-        return drawResult;
+        return buildDrawResult(req.getUId(), req.getStrategyId(),awardId);
     }
 
     /**

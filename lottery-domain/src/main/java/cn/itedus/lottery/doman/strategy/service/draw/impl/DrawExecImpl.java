@@ -15,11 +15,14 @@ import java.util.List;
 public class DrawExecImpl extends AbstractDrawBase {
     @Override
     protected List<String> queryExcludeAwardIds(Long strategyId) {
-        return null;
+        List<String> awardList = strategyRepository.queryNoStockStrategyAwardList(strategyId);
+        return awardList;
     }
 
     @Override
     protected String drawAlgorithm(Long strategyId, IDrawAlgorithm drawAlgorithm, List<String> excludeAwardIds) {
-        return "";
+        // 执行抽奖算法
+        String awardId = drawAlgorithm.randomDraw(strategyId, excludeAwardIds);
+        return awardId;
     }
 }
